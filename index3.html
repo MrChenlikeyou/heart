@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .app{
+            width: 800px;
+            /* height: 700px; */
+            margin: 150px auto;
+            position: relative;
+            border: 1px solid black;
+        }
+        .att{
+            position: relative;
+            height: 400px;
+        }
+        img{
+            width: 800px;
+            height: 400px;
+            position: absolute;
+            left:0;
+            top: 0;
+            opacity: 0;
+            transition:.6s;
+            
+        }
+        .aoo div{
+            height: 100%;
+            width: 20%;
+            background-color: black;
+            font-size: 20px;
+            text-align: center;
+            cursor: pointer;
+            
+        }
+        .aoo div:hover,.aoo div.act{
+            background-color: orange;
+            color: black;
+        }
+        .aoo{
+            color: white;
+            line-height: 50px;
+            height: 50px;
+            background-color: black;
+            display: flex;
+            position: relative;
+        }
+        
+        .left{
+            position: absolute;
+            top:50%;
+            left: 0;
+            width: 20px;
+            height: 60px;
+            border: 1px solid black;
+            line-height: 60px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            opacity: .6;
+            user-select: none;
+
+        }
+        .right{
+            position: absolute;
+            top:50%;
+            right: 0;
+            width: 20px;
+            height: 60px;
+            border: 1px solid black;
+            line-height: 60px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            opacity: .6;
+            user-select: none;
+        }
+        .left:hover,.right:hover{
+            opacity: 1;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="att">
+            <img src="./mayi1.png" alt="">
+            <img src="./mayi2.png" alt="">
+            <img src="./mayi3.png" alt="">
+            <img src="./mayi4.png" alt="">
+            <img src="./mayi5.png" alt="">
+        </div>
+            <div class="aoo">
+                <div>麻衣1</div>
+                <div>麻衣2</div>
+                <div>麻衣3</div>
+                <div>麻衣4</div>
+                <div>麻衣5</div>
+            </div>
+            
+        <div class="right">➡</div>
+        <div class="left">⬅</div>
+        </div>    
+        <script>
+            var flag=0;
+            var bwffFlag;
+            var app=document.querySelector('.app');
+            var imgDOM=document.querySelectorAll('img');
+            var aoo=document.querySelectorAll('.aoo div');
+            var left=document.querySelector('.left');
+            var right=document.querySelector('.right');
+
+            function qhtp(i){
+                buffFlag=flag;
+                flag=i;
+                imgDOM[buffFlag].style.opacity=0;
+                if(aoo[buffFlag].classList.contains('act')) aoo[buffFlag].classList.remove('act');
+                imgDOM[flag].style.opacity=1;
+                
+                aoo[flag].classList.add('act');
+            }
+
+            for(let i =0;i<aoo.length;i++){
+                aoo[i].onclick=function(){
+                    qhtp(i);
+                }
+
+            }
+
+            left.onclick=function(){
+                let fla=flag-1;
+                if(flag==0) fla=4;
+                qhtp(fla);
+            }
+            right.onclick=function(){
+                let fla=flag+1;
+                if(flag==4) fla=0;
+                qhtp(fla);
+            }
+            qhtp(0);
+            
+            function lunbo(){
+                window.lunb=setInterval(function(){
+                    let fla=flag+1;
+                    if(fla>4)fla=0;
+                    qhtp(fla);
+                },2000)
+            }
+            lunbo();
+            app.onmouseover=function(){
+                clearInterval(window.lunb);
+            }
+            app.onmouseout=function(){
+                lunbo()
+            }
+            
+
+        </script>
+    
+
+    
+    
+</body>
+</html>
